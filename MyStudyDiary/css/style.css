@@ -1,0 +1,81 @@
+/* Diario de Estudio - Custom Styles */
+
+body {
+  background-color: #f8f9fa;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  max-width: 500px;
+}
+
+h1,
+h2 {
+  color: #333;
+}
+
+h2 {
+  font-size: 1.3em;
+  margin-bottom: 15px;
+}
+
+/* Tarjeta de racha */
+.streak-card {
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  border-radius: 15px;
+  padding: 25px;
+  border: 2px solid #ffcc80;
+}
+
+.streak-number {
+  font-size: 3.5em;
+  font-weight: bold;
+  color: #ff6b35;
+  line-height: 1;
+}
+
+.streak-fire {
+  font-size: 2.5em;
+  color: #ff6b35;
+  margin: 5px 0;
+}
+
+.streak-label {
+  color: #666;
+  font-size: 1.1em;
+}
+
+/* Formulario */
+.form-label {
+  font-weight: 600;
+  color: #555;
+}
+
+.btn-primary {
+  background-color: #ff6b35;
+  border-color: #ff6b35;
+  font-weight: 600;
+  padding: 10px;
+}
+
+.btn-primary:hover {
+  background-color: #e55a2b;
+  border-color: #e55a2b;
+}
+
+/* Lista de sesiones */
+.list-group-item {
+  border-left: 4px solid #ff6b35;
+  margin-bottom: 8px;
+  border-radius: 5px !important;
+}
+
+.session-topic {
+  font-weight: 600;
+  color: #333;
+}
+
+.session-details {
+  color: #777;
+  font-size: 0.9em;
+}
