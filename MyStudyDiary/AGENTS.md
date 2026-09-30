@@ -1,4 +1,4 @@
-# AGENTS.md
+# AGENTS.md -Diario de estudio
 
 Web estática "Diario de Estudio" para registrar sesiones de estudio y mantener la motivación con una racha de días consecutivos. Sin build, sin servidor, sin dependencias locales.
 
@@ -51,6 +51,13 @@ MyStudyDiary/
 - **Racha:** un día cuenta si tiene al menos una sesión; la racha son días consecutivos terminando hoy (o ayer si hoy aún no hay sesión)
 - **ID de sesión:** se genera con `Date.now()` — no es 100% único si se crean dos en el mismo milisegundo, pero suficiente para uso personal
 - **Orden de la lista:** primero por fecha descendente, luego por `id` descendente (más reciente primero)
+
+
+## comandos
+-Tests: 'node --test'
+
+## Reglas
+--lee 'docs/constitution.md' y la spec activa ('specs/NN--*/') antes de tocar el codigo
 
 ## Forma de trabajar
 

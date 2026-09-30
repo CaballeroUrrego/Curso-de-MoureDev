@@ -1,81 +1,378 @@
-/* Diario de Estudio - Custom Styles */
+/* Diario de Estudio — Bitácora */
+
+:root {
+  --ink: #0f1b2a;
+  --paper: #f5f0e8;
+  --surface: #1a2b3d;
+  --accent: #ff8c42;
+  --muted: #8a9bae;
+  --line: #2a3f55;
+}
 
 body {
-  background-color: #f8f9fa;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--ink);
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  color: var(--paper);
+  line-height: 1.6;
 }
 
 .container {
-  max-width: 500px;
+  max-width: 520px;
 }
 
-h1,
-h2 {
-  color: #333;
+/* ── Cabecera ── */
+
+.header-icon {
+  font-size: 2.5rem;
+  color: var(--accent);
+  margin-bottom: 12px;
 }
 
-h2 {
-  font-size: 1.3em;
-  margin-bottom: 15px;
+h1 {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--paper);
+  margin: 0;
+  letter-spacing: -0.02em;
 }
 
-/* Tarjeta de racha */
-.streak-card {
-  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
-  border-radius: 15px;
-  padding: 25px;
-  border: 2px solid #ffcc80;
+.header-subtitle {
+  color: var(--muted);
+  font-size: 1rem;
+  margin: 8px 0 0;
+}
+
+/* ── Racha ── */
+
+.streak-badge {
+  margin-bottom: 32px;
+}
+
+.streak-circle {
+  width: 140px;
+  height: 140px;
+  border: 3px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  position: relative;
+}
+
+.streak-circle::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
 }
 
 .streak-number {
-  font-size: 3.5em;
-  font-weight: bold;
-  color: #ff6b35;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: var(--accent);
   line-height: 1;
 }
 
-.streak-fire {
-  font-size: 2.5em;
-  color: #ff6b35;
-  margin: 5px 0;
+.streak-unit {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
 }
 
 .streak-label {
-  color: #666;
-  font-size: 1.1em;
+  color: var(--muted);
+  font-size: 0.95rem;
 }
 
-/* Formulario */
+.streak-label i {
+  color: var(--accent);
+  margin-right: 6px;
+}
+
+.best-streak {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 8px;
+}
+
+.best-streak i {
+  color: var(--accent);
+  margin-right: 6px;
+}
+
+.best-streak span {
+  color: var(--paper);
+  font-weight: 600;
+}
+
+/* ── Totales ── */
+
+.time-stats {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+
+.stat-item i {
+  color: var(--accent);
+  margin-right: 6px;
+}
+
+.stat-item span {
+  color: var(--paper);
+  font-weight: 600;
+}
+
+.stat-separator {
+  margin: 0 12px;
+  color: var(--line);
+}
+
+/* ── Formulario ── */
+
+.form-card {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.form-title {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--paper);
+  margin-bottom: 20px;
+}
+
+.form-title i {
+  color: var(--accent);
+  margin-right: 8px;
+}
+
 .form-label {
   font-weight: 600;
-  color: #555;
+  color: var(--paper);
+  font-size: 0.85rem;
+  margin-bottom: 6px;
 }
 
-.btn-primary {
-  background-color: #ff6b35;
-  border-color: #ff6b35;
+.form-control {
+  background-color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--paper);
+  padding: 10px 14px;
+  font-size: 0.95rem;
+}
+
+.form-control:focus {
+  background-color: var(--ink);
+  border-color: var(--accent);
+  color: var(--paper);
+  box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.15);
+}
+
+.form-control::placeholder {
+  color: var(--muted);
+}
+
+.btn-submit {
+  background-color: var(--accent);
+  border: none;
+  color: var(--ink);
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: background-color 0.15s;
+}
+
+.btn-submit:hover {
+  background-color: #ffa060;
+  color: var(--ink);
+}
+
+/* ── Lista de sesiones ── */
+
+.section-title {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.1rem;
   font-weight: 600;
-  padding: 10px;
+  color: var(--paper);
+  margin-bottom: 16px;
 }
 
-.btn-primary:hover {
-  background-color: #e55a2b;
-  border-color: #e55a2b;
+.section-title i {
+  color: var(--accent);
+  margin-right: 8px;
 }
 
-/* Lista de sesiones */
-.list-group-item {
-  border-left: 4px solid #ff6b35;
-  margin-bottom: 8px;
-  border-radius: 5px !important;
+.sessions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.session-entry {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.session-info {
+  flex: 1;
+  min-width: 0;
 }
 
 .session-topic {
   font-weight: 600;
-  color: #333;
+  color: var(--paper);
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+  word-break: break-word;
 }
 
 .session-details {
-  color: #777;
-  font-size: 0.9em;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.session-details i {
+  margin-right: 4px;
+}
+
+.session-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.session-actions button {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 6px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  transition: all 0.15s;
+}
+
+.session-actions button:hover {
+  color: var(--accent);
+  background-color: rgba(255, 140, 66, 0.1);
+}
+
+.session-actions button.delete:hover {
+  color: #ff6b6b;
+  background-color: rgba(255, 107, 107, 0.1);
+}
+
+/* ── Modal ── */
+
+.modal-content {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--paper);
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--line);
+}
+
+.modal-title {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  color: var(--paper);
+}
+
+.modal-footer {
+  border-top: 1px solid var(--line);
+}
+
+.btn-close {
+  filter: invert(1);
+}
+
+.btn-cancel {
+  background-color: transparent;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.btn-cancel:hover {
+  border-color: var(--muted);
+  color: var(--paper);
+}
+
+.btn-save {
+  background-color: var(--accent);
+  border: none;
+  color: var(--ink);
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.btn-save:hover {
+  background-color: #ffa060;
+  color: var(--ink);
+}
+
+/* ── Animación de racha ── */
+
+@keyframes streakPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.streak-number.pop {
+  animation: streakPop 0.3s ease;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .streak-circle {
+    width: 120px;
+    height: 120px;
+  }
+
+  .streak-number {
+    font-size: 2.6rem;
+  }
+
+  .form-card {
+    padding: 20px;
+  }
 }
