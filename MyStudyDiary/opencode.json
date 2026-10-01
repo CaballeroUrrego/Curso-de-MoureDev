@@ -3,7 +3,14 @@
   "mcp": {
     "chrome-devtools": {
       "type": "local",
-      "command": ["C:\\Windows\\System32\\cmd.exe", "/d", "/s", "/c", "npx -y chrome-devtools-mcp@latest --no-usage-statistics"]
+      "command": [
+        "C:\\Windows\\System32\\cmd.exe",
+        "/d",
+        "/s",
+        "/c",
+        "C:\\Users\\se302\\AppData\\Roaming\\npm\\chrome-devtools-mcp.cmd --no-usage-statistics"
+      ],
+      "timeout": 30000
     }
   }
 }
