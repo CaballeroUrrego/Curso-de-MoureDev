@@ -94,8 +94,15 @@
         </div>
       </form>
 
+      <!-- Mapa de calor -->
+      <section id="heat-map-section" class="mb-5">
+        <h2 class="section-title"><i class="fas fa-th"></i> Mapa de calor</h2>
+        <div id="heat-map-container"></div>
+        <p id="heat-map-empty-message" class="text-muted">Aún no hay sesiones registradas</p>
+      </section>
+
       <!-- Lista de sesiones -->
-      <h2 class="section-title"><i class="fas fa-book-open"></i> Sesiones</h2>
+      <h2 class="section-title" id="sessions-title"><i class="fas fa-book-open"></i> Sesiones</h2>
       <div id="sessions-list" class="sessions-list"></div>
     </div>
 
@@ -154,6 +161,7 @@
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
+    <script src="js/heat-map.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>

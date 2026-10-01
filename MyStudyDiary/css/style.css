@@ -151,6 +151,7 @@ h1 {
   font-weight: 600;
   color: var(--paper);
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .form-title i {
@@ -209,6 +210,7 @@ h1 {
   font-weight: 600;
   color: var(--paper);
   margin-bottom: 16px;
+  text-align: center;
 }
 
 .section-title i {
@@ -220,6 +222,7 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  align-items: center;
 }
 
 .session-entry {
@@ -375,4 +378,71 @@ h1 {
   .form-card {
     padding: 20px;
   }
+}
+
+/* ── Mapa de calor ── */
+
+#heat-map-section {
+  text-align: center;
+}
+
+#heat-map-container {
+  display: inline-flex;
+  gap: 3px;
+  overflow-x: auto;
+  padding: 4px 0;
+  justify-content: center;
+}
+
+.heat-map-week {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.heat-map-day {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.heat-map-day:hover,
+.heat-map-day:focus {
+  transform: scale(1.2);
+  outline: none;
+}
+
+.heat-map-day.nivel-0 { background-color: var(--line); }
+.heat-map-day.nivel-1 { background-color: #9be9a8; }
+.heat-map-day.nivel-2 { background-color: #40c463; }
+.heat-map-day.nivel-3 { background-color: #30a14e; }
+.heat-map-day.nivel-4 { background-color: #216e39; }
+.heat-map-day.future { opacity: 0.3; }
+
+#heat-map-tooltip {
+  position: absolute;
+  background: var(--surface);
+  color: var(--paper);
+  border: 1px solid var(--line);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none;
+  display: none;
+  z-index: 1000;
+  white-space: nowrap;
+}
+
+#heat-map-empty-message {
+  display: none;
+  margin-top: 12px;
+  color: var(--paper);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+@media (max-width: 320px) {
+  .heat-map-day { width: 12px; height: 12px; }
 }

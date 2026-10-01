@@ -287,6 +287,7 @@ function saveEdit() {
   updateWeeklyMinutes();
   updateMonthlyDays();
   renderSessions(sessions);
+  updateHeatMap();
 
   editModal.hide();
   editingSessionId = null;
@@ -311,6 +312,7 @@ function deleteSession(id) {
   updateWeeklyMinutes();
   updateMonthlyDays();
   renderSessions(filtered);
+  updateHeatMap();
 }
 
 // Inicializar
@@ -328,6 +330,7 @@ document.addEventListener("DOMContentLoaded", function () {
   updateWeeklyMinutes();
   updateMonthlyDays();
   renderSessions(loadSessions());
+  initHeatMap();
 
   // Enviar formulario
   document
@@ -355,6 +358,7 @@ document.addEventListener("DOMContentLoaded", function () {
       updateWeeklyMinutes();
       updateMonthlyDays();
       renderSessions(sessions);
+      updateHeatMap();
 
       // Limpiar solo tema y minutos
       document.getElementById("topic").value = "";
