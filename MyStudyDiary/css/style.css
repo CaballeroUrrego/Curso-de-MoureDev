@@ -222,17 +222,18 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  align-items: center;
+  align-items: stretch;
 }
 
 .session-entry {
+  width: 100%;
   background-color: var(--surface);
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 16px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
 }
 
