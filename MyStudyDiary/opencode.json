@@ -3,7 +3,7 @@
   "mcp": {
     "chrome-devtools": {
       "type": "local",
-      "command": ["npx", "-y", "chrome-devtools-mcp@latest", "--no-usage-statistics"]
+      "command": ["C:\\Windows\\System32\\cmd.exe", "/d", "/s", "/c", "npx -y chrome-devtools-mcp@latest --no-usage-statistics"]
     }
   }
 }
