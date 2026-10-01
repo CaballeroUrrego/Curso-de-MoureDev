@@ -185,6 +185,7 @@ function renderSessions(sessions) {
   for (const session of sorted) {
     const entry = document.createElement("div");
     entry.className = "session-entry";
+    entry.setAttribute("data-session-id", session.id);
 
     const infoDiv = document.createElement("div");
     infoDiv.className = "session-info";
@@ -293,26 +294,72 @@ function saveEdit() {
   editingSessionId = null;
 }
 
-// Eliminar sesión
+// Eliminar sesión con confirmación inline
 
 function deleteSession(id) {
   const sessions = loadSessions();
   const session = sessions.find((s) => s.id === id);
   if (!session) return;
 
-  const confirmed = confirm(
-    `¿Eliminar la sesión "${session.topic}" del ${session.date}?`,
-  );
-  if (!confirmed) return;
+  // Buscar el botón de eliminar correspondiente
+  const entry = document.querySelector(`[data-session-id="${id}"]`);
+  if (!entry) return;
 
-  const filtered = sessions.filter((s) => s.id !== id);
-  saveSessions(filtered);
-  updateStreak();
-  updateBestStreak();
-  updateWeeklyMinutes();
-  updateMonthlyDays();
-  renderSessions(filtered);
-  updateHeatMap();
+  const deleteBtn = entry.querySelector(".session-actions button.delete");
+  if (!deleteBtn) return;
+
+  // Si ya está en estado de confirmar, proceder con la eliminación
+  if (deleteBtn.classList.contains("confirm-delete")) {
+    const filtered = sessions.filter((s) => s.id !== id);
+    saveSessions(filtered);
+    updateStreak();
+    updateBestStreak();
+    updateWeeklyMinutes();
+    updateMonthlyDays();
+    renderSessions(filtered);
+    updateHeatMap();
+    showToast("Sesión eliminada", "danger");
+    return;
+  }
+
+  // Activar estado de confirmación
+  deleteBtn.classList.add("confirm-delete");
+  deleteBtn.innerHTML = '<i class="fas fa-check"></i>';
+  deleteBtn.title = "Confirmar eliminación";
+
+  // Revertir después de 3 segundos si no se confirma
+  setTimeout(() => {
+    if (deleteBtn.classList.contains("confirm-delete")) {
+      deleteBtn.classList.remove("confirm-delete");
+      deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+      deleteBtn.title = "Eliminar sesión";
+    }
+  }, 3000);
+}
+
+// Sistema de notificaciones toast
+
+function showToast(message, type = "info") {
+  let container = document.querySelector(".toast-container");
+  if (!container) {
+    container = document.createElement("div");
+    container.className = "toast-container";
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement("div");
+  toast.className = `toast toast-${type}`;
+  toast.textContent = message;
+  container.appendChild(toast);
+
+  requestAnimationFrame(() => {
+    toast.classList.add("show");
+  });
+
+  setTimeout(() => {
+    toast.classList.add("hide");
+    setTimeout(() => toast.remove(), 300);
+  }, 2500);
 }
 
 // Inicializar
@@ -363,8 +410,13 @@ document.addEventListener("DOMContentLoaded", function () {
       // Limpiar solo tema y minutos
       document.getElementById("topic").value = "";
       document.getElementById("minutes").value = "";
+
+      showToast("Sesión registrada correctamente", "success");
     });
 
   // Guardar edición
-  document.getElementById("save-edit").addEventListener("click", saveEdit);
+  document.getElementById("save-edit").addEventListener("click", function () {
+    saveEdit();
+    showToast("Cambios guardados", "success");
+  });
 });
