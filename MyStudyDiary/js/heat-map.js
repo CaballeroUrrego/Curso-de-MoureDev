@@ -82,15 +82,45 @@ function formatTooltip(fecha, minutos, tieneSesion) {
   return tieneSesion ? `${fechaStr} · ${minutos} min` : `${fechaStr} · Sin sesión`;
 }
 
+// Devuelve las etiquetas de mes para las semanas dadas
+function getEtiquetasMes(semanas) {
+  const etiquetas = [];
+  let mesAnterior = -1;
+  for (const semana of semanas) {
+    const primerDia = semana[0];
+    if (!primerDia) {
+      etiquetas.push("");
+      continue;
+    }
+    const mes = primerDia.getMonth();
+    if (mes !== mesAnterior) {
+      const nombreMes = primerDia.toLocaleDateString("es-ES", { month: "short" });
+      etiquetas.push(nombreMes);
+      mesAnterior = mes;
+    } else {
+      etiquetas.push("");
+    }
+  }
+  return etiquetas;
+}
+
+// Devuelve las etiquetas de día de la semana (L, M, X, J, V, S, D)
+function getEtiquetasDia() {
+  return ["L", "M", "X", "J", "V", "S", "D"];
+}
+
 // Exportar funciones para tests (se ignoran en el navegador)
 if (typeof module !== "undefined" && module.exports) {
   module.exports = {
+    formatDateKey,
     esSesionValida,
     getMinutesByDay,
     getNivelColor,
     getDiasRango,
     getSemanas,
     formatTooltip,
+    getEtiquetasMes,
+    getEtiquetasDia,
   };
 }
 
@@ -115,6 +145,8 @@ function renderHeatMap(sessions, hoy) {
   const minutosPorDia = getMinutesByDay(sessions, hoy);
   const dias = getDiasRango(hoy);
   const semanas = getSemanas(dias);
+  const etiquetasMes = getEtiquetasMes(semanas);
+  const etiquetasDia = getEtiquetasDia();
 
   // Estado vacío
   if (sessions.length === 0) {
@@ -125,6 +157,63 @@ function renderHeatMap(sessions, hoy) {
 
   // Limpiar contenedor
   container.innerHTML = "";
+
+  // Crear layout grid: [días] [grid]
+  const layoutGrid = document.createElement("div");
+  layoutGrid.style.display = "grid";
+  layoutGrid.style.gridTemplateColumns = "auto 1fr";
+  layoutGrid.style.gap = "4px";
+  layoutGrid.style.alignItems = "start";
+
+  // Columna de etiquetas de día
+  const diaLabelsContainer = document.createElement("div");
+  diaLabelsContainer.className = "heat-map-dia-labels";
+  diaLabelsContainer.style.display = "flex";
+  diaLabelsContainer.style.flexDirection = "column";
+  diaLabelsContainer.style.gap = "3px";
+  diaLabelsContainer.style.paddingTop = "24px"; // alinear con primera fila del grid (etiquetas de mes + gap)
+
+  for (const etiqueta of etiquetasDia) {
+    const label = document.createElement("div");
+    label.className = "heat-map-dia-label";
+    label.textContent = etiqueta;
+    label.style.height = "16px";
+    label.style.fontSize = "10px";
+    label.style.color = "var(--muted)";
+    label.style.display = "flex";
+    label.style.alignItems = "center";
+    diaLabelsContainer.appendChild(label);
+  }
+
+  layoutGrid.appendChild(diaLabelsContainer);
+
+  // Columna derecha: etiquetas de mes + grid
+  const rightColumn = document.createElement("div");
+
+  // Etiquetas de mes
+  const mesLabelsContainer = document.createElement("div");
+  mesLabelsContainer.className = "heat-map-mes-labels";
+  mesLabelsContainer.style.display = "flex";
+  mesLabelsContainer.style.gap = "3px";
+  mesLabelsContainer.style.marginBottom = "4px";
+
+  for (const etiqueta of etiquetasMes) {
+    const label = document.createElement("div");
+    label.className = "heat-map-mes-label";
+    label.textContent = etiqueta;
+    label.style.width = "19px";
+    label.style.textAlign = "center";
+    label.style.fontSize = "10px";
+    label.style.color = "var(--muted)";
+    mesLabelsContainer.appendChild(label);
+  }
+
+  rightColumn.appendChild(mesLabelsContainer);
+
+  // Grid del mapa
+  const gridContainer = document.createElement("div");
+  gridContainer.style.display = "inline-flex";
+  gridContainer.style.gap = "3px";
 
   // Pintar cada semana
   for (const semana of semanas) {
@@ -165,8 +254,12 @@ function renderHeatMap(sessions, hoy) {
       columna.appendChild(celda);
     }
 
-    container.appendChild(columna);
+    gridContainer.appendChild(columna);
   }
+
+  rightColumn.appendChild(gridContainer);
+  layoutGrid.appendChild(rightColumn);
+  container.appendChild(layoutGrid);
 }
 
 // Actualizar el mapa dinámicamente

@@ -469,6 +469,11 @@ h1 {
 
 #heat-map-section {
   text-align: center;
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px 16px;
+  margin-bottom: 32px;
 }
 
 #heat-map-container {
@@ -483,7 +488,7 @@ h1 {
 }
 
 #heat-map-container:hover {
-  scrollbar-color: var(--accent) var(--surface);
+  scrollbar-color: var(--accent) var(--ink);
 }
 
 #heat-map-container::-webkit-scrollbar {
@@ -517,15 +522,18 @@ h1 {
 .heat-map-day {
   width: 16px;
   height: 16px;
-  border-radius: 2px;
+  border-radius: 3px;
   cursor: pointer;
-  transition: transform 0.1s ease;
+  transition: all 0.15s ease;
 }
 
 .heat-map-day:hover,
 .heat-map-day:focus {
-  transform: scale(1.2);
+  transform: scale(1.25);
   outline: none;
+  box-shadow: 0 0 0 2px var(--paper);
+  z-index: 2;
+  position: relative;
 }
 
 .heat-map-day.nivel-0 { background-color: var(--line); }
@@ -537,24 +545,24 @@ h1 {
 
 #heat-map-tooltip {
   position: absolute;
-  background: var(--surface);
+  background: var(--ink);
   color: var(--paper);
   border: 1px solid var(--line);
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: 6px 12px;
+  border-radius: 6px;
   font-size: 12px;
   pointer-events: none;
   display: none;
   z-index: 1000;
   white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 #heat-map-empty-message {
   display: none;
   margin-top: 12px;
-  color: var(--paper);
-  font-size: 1rem;
-  font-weight: 500;
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
 @media (max-width: 320px) {
